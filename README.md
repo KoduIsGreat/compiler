@@ -1,2 +1,4 @@
 # test-repo
-test repo for ivy dizon
+Test repository for Ivy Dizon.
+
+Ivy is awesome.
