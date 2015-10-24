@@ -10,28 +10,23 @@
 #include <fstream>
 #include <time.h>
 #include <String>
+#include <write.h>
 using namespace std;
 
 /*
  * simple executable to generate a file with 100 random numbers;
  */
-const int max_val = 100;
+void write (char* filename);
+
+
 int main() {
     
-    char * filename;
-    cout << "name of file to generate?";
+    string filename;
+    cout << "name of file to generate?\n";
     cin >> filename;
     
-    std::ofstream ofs;
-    ofs.open (filename, std::ofstream::out | std::ofstream::app);
-    srand(time(NULL));
+    write(filename);
     
-    for(int i = 0 ; i<max_val; i++){
-        ofs << rand() % 100+i;
-        ofs << '\n';
-    }
-    
-    ofs.close();
     return 0;
 }
 
