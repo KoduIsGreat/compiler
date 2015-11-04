@@ -2,22 +2,25 @@
 #include <cradle.h>
 #include <cstdlib>
 #include <fstream>
+#include <sstream>
 #include <iostream>
 using namespace std;
+char look ;
+char tmp [MAX_BUF];
 void getChar(){
     look = cin.get();
 }
 
-void Error (char  *s){
+void Error (std::string s){
     cerr << "\nError: " << s << endl;
 }
 
-void Abort(char *s){
+void Abort(std::string s){
     Error(s);
     exit(1);
 }
 
-void Expected(char *s){
+void Expected(std::string s){
     cout <<  s <<" Expected" << endl;
 }
 
@@ -31,6 +34,8 @@ void Match (char x){
 }
 
 int isAlpha(char c){
+    bool t1 = (UPCASE(c)>=  'A');
+    bool t2 = (UPCASE(c)<=  'Z');
     return (UPCASE(c) >= 'A') && (UPCASE(c)<='Z');
 }
 
@@ -53,7 +58,13 @@ char getName(){
     
     return UPCASE(c);
 }
-
+string sConv(char c){
+    stringstream ss;
+    string s;
+    ss << c;
+    ss >> s;
+    return s;
+}
 char getNum(){
     char c = look;
     
@@ -66,11 +77,11 @@ char getNum(){
     return c;
 }
 
-void Emit(char *s){
+void Emit(std::string s){
     cout << "\t" <<s << endl;
 }
 
-void EmitLn(char *s){
+void EmitLn(std::string s){
     Emit(s);
     cout << "\n" << endl;
 }
