@@ -35,8 +35,8 @@ void Match (char x){
 
 int isAlpha(char c){
     bool t1 = (UPCASE(c)>=  'A');
-    bool t2 = (UPCASE(c)<=  'Z');
-    return (UPCASE(c) >= 'A') && (UPCASE(c)<='Z');
+    bool t2 = (UPCASE(c)<=  'z');
+    return (UPCASE(c) >= 'A') && (UPCASE(c)<='z');
 }
 
 int isDigit(char c){
