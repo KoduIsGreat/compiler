@@ -27,54 +27,63 @@ void Expected(std::string s){
 void Match (char x){
     if(look ==x){
         getChar();
+        SkipWhite();
     }else{
         cout << tmp << x;
         Expected(tmp);
     }
 }
 
-int isAlpha(char c){
-    bool t1 = (UPCASE(c)>=  'A');
-    bool t2 = (UPCASE(c)<=  'z');
-    return (UPCASE(c) >= 'A') && (UPCASE(c)<='z');
+void SkipWhite(){
+    while(isWhite(look)){
+        getChar();
+    }
 }
 
-int isDigit(char c){
+bool isAlpha(char c){    
+    return (UPCASE(c) >= 'A') && (UPCASE(c)<='Z');
+}
+
+bool isDigit(char c){
     return (c >='0') && (c<='9');
 }
 
-int isAddop(char c){
+bool isAddop(char c){
     return (c == '+') || (c == '-');
 }
+bool isAlNum(char c){
+    return isAlpha(c) || isDigit(c);
+}
+bool isWhite(char c){
+    return c == ' ' || c == '\t';
+}
+string getName(){
+    string token ="";
+    
+    if(!isAlpha(look)){
+        Expected("Name");
+    }
+    while(isAlNum(look)){
+        token = token + (char)UPCASE(look);
+        getChar();
+    }
+    SkipWhite();
+    return token;
+}
 
-char getName(){
-    char c = look;
+string getNum(){
     
-    if (!isAlpha(look)){
-        cout << tmp << " Name " << endl;
-        Expected(tmp);
+    string value ="";
+    
+    if(!isDigit(look)){
+        Expected("Integer");
     }
-    getChar();
-    
-    return UPCASE(c);
-}
-string sConv(char c){
-    stringstream ss;
-    string s;
-    ss << c;
-    ss >> s;
-    return s;
-}
-char getNum(){
-    char c = look;
-    
-    if (!isDigit(look)){
-        cout << tmp <<" Integer " << endl;
-        Expected(tmp);
+    while(isDigit(look)){
+        value = value +look;
+        getChar();
     }
-    getChar();
-    
-    return c;
+    SkipWhite();
+    return value;
 }
 
 void Emit(std::string s){
@@ -87,4 +96,5 @@ void EmitLn(std::string s){
 }
 void init(){
     getChar();
+    SkipWhite();
 }

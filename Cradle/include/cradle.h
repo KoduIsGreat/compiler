@@ -7,10 +7,11 @@
 #include <string>
 #ifndef CRADLE_H
 #define	CRADLE_H
-#define UPCASE(C) ((1<<6) |(C))
+#define UPCASE(C) ((C - 'a') + 'A')
 #define MAX_BUF 100
 extern char tmp[MAX_BUF];
 extern char look;
+extern char CR;
 
 void getChar();
 
@@ -18,12 +19,14 @@ void Error (std::string s);
 void Abort (std::string s);
 void Expected(std::string s);
 void Match(char x);
-
-int isAlpha(char c);
-int isDigit(char c);
-int isAddop(char c);
-char getName();
-char getNum();
+void SkipWhite();
+bool isAlpha(char c);
+bool isWhite(char c);
+bool isDigit(char c);
+bool isAddop(char c);
+bool isAlNum(char c);
+std::string getName();
+std::string getNum();
 
 void Emit(std::string s);
 void EmitLn(std::string s);

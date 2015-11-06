@@ -18,7 +18,7 @@ void Expression();
 void Add();
 void Substract();
 void Factor();
-string sConv(char c);
+char CR='\n';
 
 void Multiply()
 {
@@ -53,12 +53,12 @@ void Divide()
 void Ident(){
     // convert to string 
     
-    string name =sConv( getName());
+    string name =getName();
     
     if(look == '('){
         Match('(');
         Match(')');
-        EmitLn("BSR $"+ name);
+        EmitLn("bsr $"+ name);
     }
     else{
         string s = "movl $"+name+", %edx";
@@ -136,6 +136,14 @@ void Expression()
     }
 }
 
+void Assignment()
+{
+    string name = getName();    
+    Match('=');
+    Expression();
+    EmitLn("leal %eax, "+name);
+    EmitLn("movl %eax, %edx");
+}
 
 void Add()
 {
@@ -162,7 +170,10 @@ int main()
     while(true)
     {
         init();
-        Expression();
+        Assignment();
+        if(look != CR){
+            Expected("NewLine");
+        }
     }
     return 0;
 }
