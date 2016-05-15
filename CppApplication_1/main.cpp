@@ -24,24 +24,24 @@ int* reverse(int list[]);
 int main() {
     while(true){
         string command;
-        cout << "commands\n";
-        cout << "read or write\n";
-        cout << "q to quit\n";
-        cout << "are you reading or writing?\n";
+        cout << "commands\n" <<endl;
+        cout << "read or write\n" <<endl;
+        cout << "q to quit\n" <<endl;
+        cout << "are you reading or writing?\n" <<endl;
         cin>> command;
         if(command.compare("read")==0){
             string filename;
-            cout << "name of file to read\n";
+            cout << "name of file to read\n"<<endl;
             cin >> filename;
             int* rList= reverse(read(filename));
-            for(int i =0 ; i < 100;i++){
+            for(int i =0 ; i < 100;i++){//bad magic #
                 cout << rList[i];
                 cout <<"\n";
             }
         }
         else if(command.compare("write")==0){
             string filename;
-            cout << "name of file to generate?\n";
+            cout << "name of file to generate?\n"<<endl;
             cin >> filename;
 
             write(filename);
@@ -50,7 +50,7 @@ int main() {
             break;
         }
         else{
-            cout << "incorrect option";
+            cout << "incorrect option"<<endl;
         }
     }
     return 0;
